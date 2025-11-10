@@ -1,0 +1,27 @@
+MEDICAL DISCLAIMER
+
+Osmolyte: SIADH–CSW–DI Navigator is an educational tool designed for medical students, residents, and healthcare professionals to learn about sodium and water disorders.
+
+IMPORTANT NOTICES:
+
+1. EDUCATIONAL USE ONLY
+   This application is intended solely for educational purposes and should not be used as a substitute for professional medical advice, diagnosis, or treatment.
+
+2. NOT A CLINICAL DECISION SUPPORT TOOL
+   The calculators, algorithms, and recommendations provided are simplified educational models and may not reflect the complexity of real clinical situations.
+
+3. CLINICAL JUDGMENT REQUIRED
+   Always seek the advice of qualified healthcare providers with any questions regarding medical conditions. Never disregard professional medical advice or delay seeking it because of information from this application.
+
+4. NO PATIENT CARE
+   This tool should never be used for actual patient care decisions without consulting current clinical guidelines, institutional protocols, and experienced clinicians.
+
+5. ACCURACY NOT GUARANTEED
+   While we strive for accuracy, medical knowledge evolves. Always verify information with current medical literature and evidence-based guidelines.
+
+6. LOCAL PROTOCOLS PREVAIL
+   Always follow your institution's specific protocols and guidelines, which may differ from the educational content presented here.
+
+By using this application, you acknowledge that you have read and understood this disclaimer and agree to use this tool solely for educational purposes.
+
+Last Updated: 2025-01-10

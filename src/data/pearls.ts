@@ -1,0 +1,107 @@
+/**
+ * Clinical pearls and mnemonics
+ */
+
+import { Pearl } from '@/types';
+
+export const pearls: Pearl[] = [
+  {
+    id: 'siadh-mnemonic',
+    title: 'SIADH: "Soaked Inside"',
+    content: 'Remember SIADH as water retention → dilution → euvolemic appearance with diluted labs (low BUN, low uric acid)',
+    mnemonic: 'SIADH = Soaked Inside, ADH high',
+    category: 'diagnosis',
+    relatedDiagnoses: ['SIADH'],
+    level: 'step1',
+  },
+  {
+    id: 'csw-mnemonic',
+    title: 'CSW: "CNS Salt Wasting"',
+    content: 'CSW needs both SALT and WATER. Key: hypovolemia differentiates from SIADH',
+    mnemonic: 'CSW = CNS Salt Wasting → needs Salt + Water',
+    category: 'diagnosis',
+    relatedDiagnoses: ['CSW'],
+    level: 'step2',
+  },
+  {
+    id: 'di-mnemonic',
+    title: 'DI: "Dry Inside"',
+    content: 'Diabetes Insipidus = water deficit, dilute urine despite dehydration',
+    mnemonic: 'DI = Dry Inside, ADH low or ineffective',
+    category: 'diagnosis',
+    relatedDiagnoses: ['central-DI', 'nephrogenic-DI'],
+    level: 'step1',
+  },
+  {
+    id: 'correction-limits',
+    title: 'Sodium Correction Speed Limits',
+    content: 'Hyponatremia: ≤6-8 mEq/L per 24h (max 0.5 mEq/L/h). Faster = risk osmotic demyelination syndrome (ODS). Hypernatremia: ≤10 mEq/L per 24h.',
+    category: 'management',
+    relatedDiagnoses: ['SIADH', 'CSW', 'central-DI', 'nephrogenic-DI'],
+    level: 'step2',
+  },
+  {
+    id: 'siadh-vs-csw',
+    title: 'SIADH vs CSW: The Volume Status Exam',
+    content: 'Both have high Una and high Uosm. KEY DIFFERENCE: CSW is hypovolemic (dry mucous membranes, orthostasis, elevated Hct/BUN), SIADH is euvolemic. CSW improves with saline, SIADH may worsen.',
+    category: 'diagnosis',
+    relatedDiagnoses: ['SIADH', 'CSW'],
+    level: 'step2',
+  },
+  {
+    id: 'feurate-pearl',
+    title: 'FE Urate Dynamics',
+    content: 'FE urate >12% in SIADH due to volume expansion. In CSW, FE urate elevated initially but NORMALIZES after volume repletion. This helps confirm CSW diagnosis retrospectively.',
+    category: 'diagnosis',
+    relatedDiagnoses: ['SIADH', 'CSW'],
+    level: 'residency',
+  },
+  {
+    id: 'beer-potomania-risk',
+    title: 'Beer Potomania: Auto-Correction Risk',
+    content: 'LOW SOLUTE intake hyponatremia (Uosm <100). DANGER: Rapidly auto-corrects when patient gets normal food → risk ODS. Monitor Na q2-4h, may need D5W to slow correction.',
+    category: 'pitfall',
+    relatedDiagnoses: ['beer-potomania'],
+    level: 'step3',
+  },
+  {
+    id: 'siadh-saline-paradox',
+    title: 'SIADH Saline Paradox',
+    content: 'Giving isotonic saline (154 mEq/L Na) to SIADH patient can WORSEN hyponatremia. Why? Patient excretes Na in concentrated urine (>154), retaining free water. Use hypertonic saline or fluid restriction instead.',
+    category: 'pitfall',
+    relatedDiagnoses: ['SIADH'],
+    level: 'step3',
+  },
+  {
+    id: 'ddavp-water-restriction',
+    title: 'DDAVP + Water = Danger',
+    content: 'If giving DDAVP (for DI or coagulopathy), patient MUST have free access to water or monitored fluid intake. Otherwise risk severe hypernatremia.',
+    category: 'pitfall',
+    relatedDiagnoses: ['central-DI'],
+    level: 'residency',
+  },
+  {
+    id: 'triphasic-response',
+    title: 'Triphasic Response after Pituitary Surgery',
+    content: 'Phase 1 (1-2d): DI from pituitary shock. Phase 2 (3-14d): SIADH from ADH release from dying cells. Phase 3 (14d+): Permanent DI if stalk cut. Expect wild Na swings!',
+    category: 'diagnosis',
+    relatedDiagnoses: ['central-DI', 'SIADH'],
+    level: 'residency',
+  },
+  {
+    id: 'osmotic-demyelination',
+    title: 'Osmotic Demyelination Syndrome',
+    content: 'Rapid Na correction (>8 mEq/L/24h) → pontine myelinolysis. Symptoms: dysarthria, dysphagia, quadriparesis, "locked-in" syndrome. High risk: alcoholism, malnutrition, liver disease. Prevention > treatment.',
+    category: 'pitfall',
+    relatedDiagnoses: ['SIADH', 'beer-potomania'],
+    level: 'step2',
+  },
+  {
+    id: 'lithium-amiloride',
+    title: 'Lithium NDI: Amiloride Rescue',
+    content: 'Amiloride blocks ENaC, reducing lithium entry into collecting duct cells. Can reduce polyuria while continuing lithium. Thiazides + low-Na diet also help paradoxically.',
+    category: 'management',
+    relatedDiagnoses: ['nephrogenic-DI'],
+    level: 'residency',
+  },
+];
