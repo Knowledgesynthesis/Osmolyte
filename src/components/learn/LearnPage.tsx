@@ -7,7 +7,11 @@ import { EssentialFormulas } from './EssentialFormulas';
 
 type Section = 'physiology' | 'definitions' | 'comparisons' | 'algorithms' | 'formulas';
 
-export const LearnPage = () => {
+interface LearnPageProps {
+  onNavigate?: (tab: 'simulator' | 'quiz') => void;
+}
+
+export const LearnPage = ({ onNavigate }: LearnPageProps) => {
   const [activeSection, setActiveSection] = useState<Section>('physiology');
 
   const sections: { id: Section; label: string; description: string }[] = [
@@ -70,10 +74,16 @@ export const LearnPage = () => {
           Now that you understand the fundamentals, test your knowledge with interactive simulators and clinical scenarios.
         </p>
         <div className="flex gap-3">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium">
+          <button
+            onClick={() => onNavigate?.('simulator')}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium transition-colors"
+          >
             Go to Simulator
           </button>
-          <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 font-medium">
+          <button
+            onClick={() => onNavigate?.('quiz')}
+            className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 font-medium transition-colors"
+          >
             Take a Quiz
           </button>
         </div>
