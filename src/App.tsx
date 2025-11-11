@@ -51,7 +51,7 @@ function App() {
       </div>
 
       {/* Learn Tab */}
-      {activeTab === 'learn' && <LearnPage />}
+      {activeTab === 'learn' && <LearnPage onNavigate={setActiveTab} />}
 
       {/* Simulator Tab */}
       {activeTab === 'simulator' && (
