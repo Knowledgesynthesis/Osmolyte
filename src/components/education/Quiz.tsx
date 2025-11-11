@@ -7,20 +7,45 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export const Quiz = () => {
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | string[] | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState({ correct: 0, total: 0 });
 
   const currentQuestion = quizQuestions[currentQuestionIdx];
 
   const handleAnswer = (answer: string) => {
-    setSelectedAnswer(answer);
+    if (currentQuestion.type === 'multi-select') {
+      setSelectedAnswer((prev) => {
+        if (!prev || typeof prev === 'string') {
+          return [answer];
+        }
+        const arr = prev as string[];
+        if (arr.includes(answer)) {
+          return arr.filter((a) => a !== answer);
+        } else {
+          return [...arr, answer];
+        }
+      });
+    } else {
+      setSelectedAnswer(answer);
+    }
   };
 
   const handleSubmit = () => {
     if (!selectedAnswer) return;
 
-    const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+    let isCorrect = false;
+    if (currentQuestion.type === 'multi-select') {
+      const correctArray = Array.isArray(currentQuestion.correctAnswer)
+        ? currentQuestion.correctAnswer
+        : [currentQuestion.correctAnswer];
+      const selectedArray = Array.isArray(selectedAnswer) ? selectedAnswer : [selectedAnswer];
+      isCorrect = correctArray.length === selectedArray.length &&
+                  correctArray.every(a => selectedArray.includes(String(a)));
+    } else {
+      isCorrect = selectedAnswer === String(currentQuestion.correctAnswer);
+    }
+
     setScore((prev) => ({
       correct: prev.correct + (isCorrect ? 1 : 0),
       total: prev.total + 1,
@@ -41,7 +66,17 @@ export const Quiz = () => {
     }
   };
 
-  const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+  let isCorrect = false;
+  if (currentQuestion.type === 'multi-select') {
+    const correctArray = Array.isArray(currentQuestion.correctAnswer)
+      ? currentQuestion.correctAnswer
+      : [currentQuestion.correctAnswer];
+    const selectedArray = Array.isArray(selectedAnswer) ? selectedAnswer : [];
+    isCorrect = correctArray.length === selectedArray.length &&
+                correctArray.every(a => selectedArray.includes(String(a)));
+  } else {
+    isCorrect = selectedAnswer === String(currentQuestion.correctAnswer);
+  }
 
   return (
     <Card>
@@ -76,15 +111,25 @@ export const Quiz = () => {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="text-lg font-medium text-slate-900 mb-4">
-                {currentQuestion.question}
-              </p>
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-lg font-medium text-slate-900 dark:text-slate-100">
+                  {currentQuestion.question}
+                </p>
+                {currentQuestion.type === 'multi-select' && (
+                  <Badge variant="default" className="ml-2 flex-shrink-0">Multi-select</Badge>
+                )}
+              </div>
 
               {/* Options */}
               <div className="space-y-2">
                 {currentQuestion.options?.map((option) => {
-                  const isSelected = selectedAnswer === option;
-                  const isCorrectAnswer = option === currentQuestion.correctAnswer;
+                  const selectedArray = Array.isArray(selectedAnswer) ? selectedAnswer : [selectedAnswer];
+                  const correctArray = Array.isArray(currentQuestion.correctAnswer)
+                    ? currentQuestion.correctAnswer
+                    : [currentQuestion.correctAnswer];
+
+                  const isSelected = selectedArray.includes(option);
+                  const isCorrectAnswer = correctArray.includes(option);
                   const showResult = showExplanation;
 
                   return (
@@ -95,22 +140,31 @@ export const Quiz = () => {
                       className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                         showResult
                           ? isCorrectAnswer
-                            ? 'border-emerald-500 bg-emerald-50'
+                            ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
                             : isSelected
-                            ? 'border-red-500 bg-red-50'
-                            : 'border-slate-200 bg-white'
+                            ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
+                            : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800'
                           : isSelected
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-slate-200 bg-white hover:border-slate-300'
+                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                          : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600'
                       } ${showExplanation ? 'cursor-default' : 'cursor-pointer'}`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-slate-900">{option}</span>
+                        <div className="flex items-center gap-3">
+                          {currentQuestion.type === 'multi-select' && (
+                            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                              isSelected ? 'bg-blue-600 border-blue-600' : 'border-slate-300 dark:border-slate-600'
+                            }`}>
+                              {isSelected && <span className="text-white text-sm">✓</span>}
+                            </div>
+                          )}
+                          <span className="text-slate-900 dark:text-slate-100">{option}</span>
+                        </div>
                         {showResult && isCorrectAnswer && (
-                          <span className="text-emerald-600 font-semibold">✓</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">✓</span>
                         )}
                         {showResult && isSelected && !isCorrectAnswer && (
-                          <span className="text-red-600 font-semibold">✗</span>
+                          <span className="text-red-600 dark:text-red-400 font-semibold">✗</span>
                         )}
                       </div>
                     </button>

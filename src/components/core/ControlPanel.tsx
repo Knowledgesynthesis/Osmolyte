@@ -33,7 +33,16 @@ export const ControlPanel = () => {
   const serumUricAcid = useStore((state) => state.serumUricAcid);
   const setSerumUricAcid = useStore((state) => state.setSerumUricAcid);
 
+  const timeElapsed = useStore((state) => state.timeElapsed);
+  const advanceTime = useStore((state) => state.advanceTime);
+  const baselineNa = useStore((state) => state.baselineNa);
+
   const resetState = useStore((state) => state.resetState);
+
+  const handleTimeChange = (newTime: number) => {
+    const diff = newTime - timeElapsed;
+    advanceTime(diff);
+  };
 
   return (
     <Card>
@@ -44,7 +53,7 @@ export const ControlPanel = () => {
         <div className="space-y-6">
           {/* Serum Labs */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
+            <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
               Serum Labs
             </h4>
             <Slider
@@ -87,7 +96,7 @@ export const ControlPanel = () => {
 
           {/* Urine Labs */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
+            <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
               Urine Labs
             </h4>
             <Slider
@@ -112,7 +121,7 @@ export const ControlPanel = () => {
 
           {/* Volume Status */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
+            <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
               Volume Status
             </h4>
             <div className="flex gap-2">
@@ -134,7 +143,7 @@ export const ControlPanel = () => {
 
           {/* Clinical Context */}
           <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
+            <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
               Clinical Context
             </h4>
             <Toggle
@@ -147,6 +156,32 @@ export const ControlPanel = () => {
               checked={lithiumExposure}
               onCheckedChange={setLithiumExposure}
             />
+          </div>
+
+          {/* Time Management */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
+              Correction Monitoring
+            </h4>
+            {baselineNa && (
+              <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded text-sm">
+                <p className="text-blue-900 dark:text-blue-300">
+                  <strong>Baseline Na:</strong> {baselineNa} mEq/L
+                </p>
+              </div>
+            )}
+            <Slider
+              label="Time Elapsed"
+              value={timeElapsed}
+              onValueChange={handleTimeChange}
+              min={0}
+              max={72}
+              step={1}
+              unit="hours"
+            />
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Use to monitor sodium correction rate over time
+            </p>
           </div>
 
           {/* Reset Button */}
