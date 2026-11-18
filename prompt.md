@@ -1,3 +1,10 @@
+> **Errata (November 2026).** This is the original build brief, kept for history. The app no longer follows it where it conflicts with the evidence:
+> - FE urate *normalises* after correction in **SIAD** and stays high in salt wasting (the brief states the reverse).
+> - Chronic hyponatremia limits are EU 10 then 8 mmol/L per 24 h, US 10–12/24 h (8 if high risk), measured as cumulative change per 24 h, not as an hourly rate.
+> - Central/nephrogenic DI are now AVP deficiency/resistance (2022); copeptin testing (hypertonic-saline-stimulated) is preferred over water deprivation.
+> - "Educational only" notices were reduced to a single footer line.
+> See README.md → *Corrections to the previous version*.
+
 # MASTER PROMPT — “Osmolyte: SIADH–CSW–DI Navigator”
 
 You are a senior product designer + front-end engineer (React/TypeScript/Tailwind) + clinician-educator (nephrology/endocrinology) + learning-science specialist. Build a fully responsive, educational, interactive dashboard website that teaches **SIADH**, **cerebral salt wasting (CSW)**, **diabetes insipidus (central & nephrogenic)**, and the physiology, diagnosis, and management of **water/sodium disorders**—scaffolded from **USMLE Step 1 → Step 2 → Step 3 → residency → nephrology** depth.

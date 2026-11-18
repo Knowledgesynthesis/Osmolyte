@@ -1,200 +1,77 @@
-# Osmolyte: SIADH–CSW–DI Navigator
+# Osmolyte — sodium & water disorders, from first principles
 
-An interactive educational dashboard for learning about sodium and water disorders, specifically SIADH (Syndrome of Inappropriate ADH), CSW (Cerebral Salt Wasting), and DI (Diabetes Insipidus).
+An interactive, evidence-based course on hyponatremia, SIAD, cerebral salt wasting, AVP deficiency/resistance (formerly central/nephrogenic diabetes insipidus) and hypernatremia. It is built around two equations — **serum Na ≈ (Naₑ + Kₑ) ÷ total body water** and **urine volume = solute ÷ urine osmolality** — and a simulator that applies them hour by hour.
 
-## Overview
+## What's inside
 
-Osmolyte is designed to help medical students, residents, and healthcare professionals master the diagnosis and management of complex electrolyte disorders through interactive simulations, real-time diagnostic feedback, and evidence-based educational content.
+| Area | What it does |
+|---|---|
+| **Course** (8 modules, ≈ 3 h) | Physiology → first ten minutes → finding the cause → SIAD vs CSW → safe treatment → polyuria → hypernatremia & AVP disorders → special situations. Each module has objectives, rapid "see → think → do" patterns, embedded interactives and a mastery check. |
+| **Fluid Lab** | 48-hour mass-balance simulator (Edelman + solute-limited water excretion) with six scenarios: SIAD, hypovolemia, beer potomania, AVP-D without thirst, lithium AVP-R and salt wasting. Shows the water diuresis that drives overcorrection, desmopressin clamps, the saline paradox, urea, tolvaptan, thiazides and loop diuretics, with 24/48-h limit lines, a comparison trace and a data table. |
+| **Cases** | Ten branching cases (ED, ward, neuro-ICU, clinic, obstetrics) with per-option feedback, a first-try score and a structured debrief. |
+| **Practice** | 55 questions (single, multi-select, numeric) with a rationale for every option; review queue of unanswered or missed items; 25-second pattern drill. |
+| **Flashcards** | 49 cards with Leitner spaced repetition (1 → 3 → 7 → 16 days). |
+| **Tools** | Hyponatremia navigator (EU urine-first algorithm), osmolality/tonicity & corrected Na, correction-limit flowsheet monitor, Adrogué–Madias planner, Furst ratio & EFWC, fractional excretion, free-water planner, solute explorer, polyuria test bench (water deprivation and copeptin). |
+| **Reference** | 43 cited sources with one-line takeaways and DOI/PubMed links, a drug table and key numbers. Every in-text citation links here. |
 
-## Features
+Progress (answers, mastery, cards, cases) is stored locally in the browser.
 
-### 🎯 Interactive Simulator
-- **Real-time Diagnostic Engine**: Adjust clinical parameters and see immediate diagnostic updates
-- **Control Panel**: Interactive sliders for serum sodium, glucose, BUN, urine osmolality, urine sodium, and more
-- **Volume Status Assessment**: Select between hypovolemic, euvolemic, and hypervolemic states
-- **Clinical Context Flags**: CNS injury, lithium exposure, pregnancy, and other relevant factors
+## Evidence base (reviewed November 2026)
 
-### 📊 Diagnostic Tools
+The content follows the European (Spasovski 2014) and US (Verbalis 2013) hyponatremia guidelines and the AHA/ASA 2023 aSAH guideline, updated with:
 
-#### Diagnostic Display
-- Real-time confidence scores for differential diagnoses
-- Supporting and contradicting features with clinical reasoning
-- Calculated values (serum osmolality, total body water)
-- Evidence-based next steps and warning flags
+- **HIT (NEJM Evid 2026)** — targeted normalisation of Na in hospitalised chronic hyponatremia did not reduce 30-day death or readmission.
+- **MacMillan 2023, Seethapathy 2023, Ayus 2025** — ODS is rare (0.05%), and slower correction of severe hyponatremia is associated with higher mortality (observational). Guideline limits still apply.
+- **SALSA (2021)** — bolus hypertonic saline is as safe as continuous infusion.
+- **Fenske 2018, CARGO 2023, Timper 2015** — copeptin-based testing (hypertonic-saline-stimulated copeptin is the reference test) replaces the water deprivation test as first choice.
+- **2022 renaming** — AVP deficiency / AVP resistance.
+- **Chauhan 2019, Feigin 2023** — faster correction of hypernatremia in adults was not harmful.
+- **Garrahy 2020, EFFUSE-FLUID 2020, empagliflozin RCTs 2020/2023** — the evidence behind each step of chronic SIAD treatment.
 
-#### SIADH vs CSW Comparator
-- Side-by-side comparison of key diagnostic features
-- Confidence scores for each diagnosis
-- Interactive comparison table highlighting key differentiators
-- Clinical pearls for distinguishing these challenging conditions
+### Corrections to the previous version
 
-#### Correction Safety Meter
-- Real-time monitoring of sodium correction rates
-- Visual safety indicators (safe/caution/danger zones)
-- Educational guardrails preventing osmotic demyelination syndrome
-- Automatic calculation of correction rate per 24 hours
+The earlier app contained errors that this version fixes:
 
-### 📚 Educational Content
+1. **FE urate dynamics were reversed.** It normalises after correction in SIAD and stays high in salt wasting (Maesaka) — not the other way round.
+2. **Correction limits were applied as extrapolated hourly rates** ("5 in 2 h = 60/day → danger"). Limits concern the cumulative change in each 24-hour period; a 5 mmol/L rise in the first hour is the guideline target for severe symptoms.
+3. **Limits were wrong**: "≤ 6–8 mmol/L/day" with a "0.5 mmol/L/h" ceiling for hyponatremia. The correct limits are EU 10, then 8 per 24 h; US 10–12/24 h and 18/48 h; high-risk 8/24 h.
+4. **The ΔNa formula** divided by (TBW + volume) without scaling by volume and ignored potassium. Now exact mass balance (equal to Adrogué–Madias for 1 L), with Na + K.
+5. **Tonicity used calculated osmolality including urea**, misclassifying uremic patients as isotonic. Now effective osmolality is used.
+6. **"DDAVP + no water = hypernatremia" pearl** was inverted. The danger of desmopressin with free water intake is *hyponatremia*.
+7. **Gestational DI was labelled nephrogenic.** It is vasopressinase-mediated AVP deficiency and responds to desmopressin.
+8. **DI was taught as always hypernatremic.** With intact thirst, Na is high-normal; hypernatremia needs a failure of thirst or water access.
+9. **Missing topics added**: pseudohyponatremia, glucose-corrected Na, glucocorticoid deficiency as the SIAD mimic, the water diuresis behind overcorrection, relowering, desmopressin clamps, K repletion raising Na, thiazides raising lithium levels, the urine/serum electrolyte ratio, copeptin testing, the post-pituitary-surgery patterns, CSW epidemiology and SAH management.
 
-#### Clinical Scenarios
-Six comprehensive, evidence-based clinical scenarios:
-1. **Neuro-ICU SAH with Hyponatremia** - CSW vs SIADH differential (Residency level)
-2. **Pneumonia with Euvolemic Hyponatremia** - Classic SIADH presentation (Step 2)
-3. **Lithium-Induced Nephrogenic DI** - Management of drug-induced DI (Step 3)
-4. **Post-Traumatic Central DI** - Acute DI after neurosurgery (Residency level)
-5. **Beer Potomania** - Low solute intake hyponatremia (Step 2)
-6. **Psychogenic Polydipsia** - Differential diagnosis with partial DI (Step 3)
-
-#### Quick Quiz
-- 8 board-style questions covering key concepts
-- Instant feedback with detailed explanations
-- Difficulty levels: Easy, Medium, Hard
-- Score tracking and performance analytics
-
-#### Clinical Pearls & Mnemonics
-- 12 high-yield pearls with flip-card interface
-- Memorable mnemonics (e.g., "SIADH: Soaked Inside")
-- Categorized by diagnosis, management, physiology, and pitfalls
-- Progressive disclosure by training level
-
-## Technology Stack
-
-### Core Framework
-- **React 18** with **TypeScript** for type-safe component development
-- **Vite** for fast development and optimized production builds
-- **Tailwind CSS** for responsive, utility-first styling
-
-### State Management & Logic
-- **Zustand** for lightweight, performant state management
-- Custom selectors for derived state and diagnostic logic
-- Deterministic medical algorithms based on clinical guidelines
-
-### UI & Animations
-- **Framer Motion** for smooth, purposeful animations
-- Custom-designed color semantics for medical conditions
-- WCAG 2.2 AA compliant for accessibility
-
-### Medical Logic
-- Evidence-based diagnostic algorithms
-- Serum osmolality calculations
-- Free water deficit/excess calculations
-- Sodium correction rate monitoring with safety limits
-- Water deprivation test simulation
-- FE urate dynamics modeling
-
-## Installation & Usage
-
-### Prerequisites
-- Node.js 18+ and npm
-
-### Quick Start
+## Run it
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+npm run dev        # http://localhost:3000
+npm test           # 94 unit/content tests (vitest)
+npm run lint       # eslint, zero warnings allowed
+npm run build      # type-check + production build
 ```
 
-The application will be available at `http://localhost:3000`
+Requires Node ≥ 20.19. Stack: React 19, TypeScript 5.9, Vite 8, Tailwind CSS 4, Zustand 5. Hash-based routing, so any static host works (deployed on Vercel from `main`).
 
-## Educational Philosophy
+## Quality gates
 
-### Progressive Disclosure
-Content is layered by training level:
-- **Step 1**: Core physiology and basic diagnostic algorithms
-- **Step 2**: Pattern recognition and initial management
-- **Step 3**: Complex cases and disposition decisions
-- **Residency**: Edge cases, advanced monitoring, ICU management
+- `src/lib/*.test.ts` verify every formula, the correction-limit logic, the diagnostic navigator, the polyuria test engine and the Fluid Lab physiology (for example: saline lowers Na in SIAD when urine Na+K > 154; restoring volume triggers > 10 mmol/L autocorrection; a desmopressin clamp prevents it; AVP-R ignores desmopressin).
+- `src/data/content.test.ts` checks content integrity: every citation resolves, every reference is cited, answer keys match options, each case stage has exactly one correct answer, and no boilerplate disclaimers are present.
+- Browser QA: every route at 1366 px and 390 px in light and dark themes shows no console errors and no horizontal overflow, with zero axe-core WCAG 2.1 AA violations.
 
-### Safety-First Design
-- Prominent medical disclaimers on every page
-- Educational ranges only (not prescriptive dosing)
-- Correction rate warnings prevent dangerous practices
-- Emphasis on institutional protocols and clinical judgment
-
-### Evidence-Based Content
-All diagnostic criteria, management recommendations, and safety limits are based on:
-- Current nephrology and endocrinology guidelines
-- Peer-reviewed medical literature
-- Expert consensus on electrolyte disorders
-- USMLE board examination content
-
-## Key Concepts Covered
-
-### SIADH (Syndrome of Inappropriate ADH)
-- Euvolemic hypotonic hyponatremia
-- High urine osmolality (>100) and high urine sodium (>30)
-- Low BUN and uric acid from dilution
-- Management: fluid restriction, salt tablets, vaptans
-
-### CSW (Cerebral Salt Wasting)
-- Hypovolemic hyponatremia after CNS injury
-- High urinary sodium loss despite volume depletion
-- FE urate normalizes after volume repletion
-- Management: volume repletion with saline, salt supplementation
-
-### Diabetes Insipidus
-- **Central DI**: Impaired ADH release
-  - Causes: neurosurgery, TBI, pituitary tumors
-  - Treatment: desmopressin (DDAVP)
-- **Nephrogenic DI**: Renal resistance to ADH
-  - Causes: lithium, hypercalcemia, hypokalemia
-  - Treatment: amiloride, thiazides, low-Na diet
-
-## Safety & Disclaimers
-
-**IMPORTANT**: This application is for educational purposes ONLY.
-
-- NOT a substitute for professional medical advice
-- NOT for clinical decision-making or patient care
-- Always consult current guidelines and institutional protocols
-- Verify all information with qualified healthcare providers
-
-## Project Structure
+## Project structure
 
 ```
-osmolyte/
-├── src/
-│   ├── components/        # React components
-│   │   ├── core/          # Layout, ControlPanel
-│   │   ├── visualizations/# DiagnosticDisplay, SIADHvsCSW, CorrectionMeter
-│   │   ├── education/     # Quiz, PearlCards
-│   │   └── ui/            # Base UI components (Button, Card, Slider)
-│   ├── store/             # Zustand state management
-│   ├── lib/               # Medical calculations and diagnostic logic
-│   ├── types/             # TypeScript type definitions
-│   └── data/              # Clinical scenarios, pearls, drugs, quizzes
-├── public/                # Static assets
-└── README.md
+src/
+  lib/          pure engines + tests (physiology, fluidLab, sodiumMonitor, hyponatremiaNavigator, polyuria, srs)
+  data/         modules, questions, cases, cards, drugs, references (+ integrity tests)
+  store/        progress (zustand, persisted to localStorage)
+  components/   layout, home, learn, lab, interactives, practice, cases, cards, tools, reference, ui
 ```
 
-## Contributing
-
-This is an educational project. Contributions should:
-- Maintain clinical accuracy and evidence-based content
-- Include proper medical disclaimers
-- Follow accessibility guidelines (WCAG 2.2 AA)
-- Use TypeScript for type safety
-- Document medical sources and references
-
-## License
-
-Educational use only. Not for commercial distribution or clinical use.
-
-## Acknowledgments
-
-Built with the ultrathink philosophy: elegant code, clinical rigor, and educational excellence.
-
-Inspired by the need to demystify complex sodium and water disorders for learners at all levels.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for design details.
 
 ---
 
-**Remember**: In clinical practice, always correlate with the complete clinical picture, follow institutional protocols, and consult nephrology when uncertain. This tool teaches principles, but every patient is unique.
+Made by Bashar Hasan, MD. A learning resource — confirm doses and limits against local protocols.
